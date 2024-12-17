@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-5">
+  <h2>Admin Dashboard</h2>
+  <a href="/logout" class="btn btn-danger float-right">Logout</a>
+  <hr>
+  <h4>All Users:</h4>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td>{{ user[0] }}</td>
+        <td>{{ user[1] }}</td>
+        <td>
+          <form action="/edit_user/{{ user[0] }}" method="POST" style="display: inline;">
+            <input type="text" name="username" placeholder="New Username" required>
+            <input type="password" name="password" placeholder="New Password" required>
+            <button type="submit" class="btn btn-warning btn-sm">Edit</button>
+          </form>
+          <a href="/delete_user/{{ user[0] }}" class="btn btn-danger btn-sm">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+</body>
+</html>
